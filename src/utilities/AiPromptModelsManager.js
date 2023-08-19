@@ -1,4 +1,4 @@
-const { textModels } = require('../models/aiPromptModels/openaiPromptModels.js')
+const { textModels } = require('../models/AiPromptModels/openaiPromptModels.js')
 const {openaiApiKey} = require('../config.json')
 const {Configuration, OpenAIApi} = require('openai')
 
