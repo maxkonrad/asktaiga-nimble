@@ -1,7 +1,8 @@
 const {SlashCommandBuilder} = require('discord.js')
-const {AskGPT3} = require('../utilities/aiManager.js')
+const {AskGPT3, AskGPT4} = require('../utilities/AiPromptModelsManager.js')
 
-const asktaiga = new AskGPT3();
+const askTaiga3 = new AskGPT3()
+const askTaiga4 = new AskGPT4()
 
 module.exports = {
     data: new SlashCommandBuilder()
