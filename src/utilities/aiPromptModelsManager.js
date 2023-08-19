@@ -1,4 +1,4 @@
-const {aiModels} = require('../models/aiModels/aiModels.js')
+const { textModels } = require('../models/aiPromptModels/openaiPromptModels.js')
 const {openaiApiKey} = require('../config.json')
 const {Configuration, OpenAIApi} = require('openai')
 
@@ -8,7 +8,7 @@ class AskGPT3 extends OpenAIApi{
     constructor(){
         super(openaiConfig);
         this.name = 'gpt3';
-        this.body = aiModels[this.name].body;
+        this.body = textModels[this.name].body;
         this.defaultPrompt = this.body.prompt;
     }
 
@@ -35,7 +35,7 @@ class AskGPT4 extends OpenAIApi{
     constructor(){
         super(openaiConfig);
         this.name = 'gpt4';
-        this.body = aiModels[this.name].body;
+        this.body = textModels[this.name].body;
         this.defaultPrompt = this.body.prompt;
     }
 
