@@ -1,4 +1,4 @@
-const aiModels = {
+const textModels = {
     gpt3: {
         body: {
             model: 'text-davinci-003',
@@ -21,4 +21,4 @@ const aiModels = {
     },
 }
 
-module.exports = {aiModels}
+module.exports = {textModels}
