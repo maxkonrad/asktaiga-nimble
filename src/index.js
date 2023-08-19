@@ -1,12 +1,13 @@
-const {Client, IntentsBitField} = require('discord.js')
-require('dotenv').config()
+const {Client, GatewayIntentBits, REST} = require('discord.js')
+const {token, clientId, svId } = require('./config.json')
+const { DeployCommands } = require('./utilities/CommandsManager.js')
 
 const client = new Client({
     intents: [
-        IntentsBitField.Flags.Guilds,
-        IntentsBitField.Flags.GuildMembers,
-        IntentsBitField.Flags.GuildMessages,
-        IntentsBitField.Flags.MessageContent
+        GatewayIntentBits.Guilds,
+        GatewayIntentBits.GuildMembers,
+        GatewayIntentBits.GuildMessages,
+        GatewayIntentBits.MessageContent
     ],
 })
 
@@ -17,5 +18,8 @@ client.on('messageCreate', (msg) => {
 })
 
 
-client.login(process.env.token)
+DeployCommands()
+
+
+client.login(token)
 
