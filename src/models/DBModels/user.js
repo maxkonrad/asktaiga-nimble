@@ -10,8 +10,13 @@ const UserSchema = new mongoose.Schema({
         type: Boolean,
         default: false
     },
+    apiKey: {
+        type: String,
+        required: false,
+    },
     isAdmin: {
         type: Boolean,
+        required: true,
         default: false
     }
 
@@ -19,4 +24,4 @@ const UserSchema = new mongoose.Schema({
 
 const User = mongoose.model('User', UserSchema);
 
-module.exports = User;
+module.exports = {User};
