@@ -1,22 +1,26 @@
-const {SlashCommandBuilder} = require('discord.js')
-const {AskGPT3, AskGPT4} = require('../utilities/AiPromptModelsManager.js')
+const { SlashCommandBuilder } = require('discord.js')
+const { AiPromptModelsManager } = require('../utilities/AiPromptModelsManager.js')
 
-const askTaiga3 = new AskGPT3()
-const askTaiga4 = new AskGPT4()
+const aiPromptModelManager = new AiPromptModelsManager()
 
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('asktaiga')
         .setDescription('Ask a question related to programming to Taiga!')
-        .addStringOption(option => 
-            option.setName('prompt').setDescription('Your question here').setRequired(true))
-        ,
-    
-    async execute(interaction){
+        .addStringOption(option =>
+            option.setName('prompt').setDescription('Your question here').setRequired(true).choices())
+        .addStringOption(option =>
+            option.setName('chatModel').setDescription('Which Chat Model do you want to use? (Be careful when using GPT4 so, due to cost issues)')
+                .setRequired(true).addChoices(aiPromptModelManager.getAvailableModels()))
+    ,
+
+    async execute(interaction) {
         await interaction.deferReply()
+        const user = interaction.user
         const userInput = interaction.options.getString('prompt');
-        const response = await asktaiga.generateNewAnswer(userInput);
-        await interaction.editReply(response);
+        const userAiModel = interaction.options.getString('chatModel')
+        aiPromptModelManager.ask(userAiModel, userInput)
+        await interaction.editReply(response)
     }
 }
 
