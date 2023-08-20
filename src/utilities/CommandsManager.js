@@ -1,13 +1,8 @@
 const { REST, Routes, Collection } = require('discord.js');
-const {token, clientId, svId } = require('../config.json')
+const { token, clientId, svId } = require('../config.json')
 
 async function DeployCommands() {
-    const commands = [
-        {
-            name: 'furka',
-            description: 'selam furka'
-        }
-    ]
+    const commands = []
     const rest = new REST({ version: '10' }).setToken(token);
     try {
         const data = await rest.put(
