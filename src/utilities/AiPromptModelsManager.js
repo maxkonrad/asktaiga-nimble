@@ -58,8 +58,38 @@ class AskGPT4 extends OpenAIApi{
     }
 }
 
+class AiPromptModelsManager {
+    constructor() {
+        this.models = {
+            'model_gpt3': new AskGPT3(),
+            'model_gpt4': new AskGPT4()
+        };
+    }
+
+    getAvailableModels() {
+        return Object.entries(this.models).map(([key, modelInstance]) => ({
+            name: modelInstance.name,
+            value: key
+        }));
+    }
+
+    async ask(modelKey, prompt){
+        
+        try {
+            if(this.models[modelKey]){
+                return await this.models[modelKey].generateNewAnswer(prompt);
+            } else {
+                throw new Error('There is no such a model')
+            }            
+        } catch (error) {
+            console.log(error);
+            return error
+        }
+    }
+}
 
 
-module.exports = {AskGPT3, AskGPT4}
+
+module.exports = { AiPromptModelsManager }
 
 
